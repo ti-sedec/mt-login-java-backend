@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="wagner" id="CRIAR TABELA MY_ROLE">
+        <createTable tableName="my_role" catalogName="public">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="nome" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="descricao" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="INSERIR ROLES" author="wagner">
+        <insert tableName="my_role" catalogName="public">
+            <column name="nome" value="ROLE_USER" />
+            <column name="descricao" value="Usuário padrao" />
+        </insert>
+        <insert tableName="my_role" catalogName="public">
+            <column name="nome" value="ROLE_SERVIDOR" />
+            <column name="descricao" value="Usuário para servidor do Estado" />
+        </insert>
+        <insert tableName="my_role" catalogName="public">
+            <column name="nome" value="ROLE_ADM" />
+            <column name="descricao" value="Usuário para Administrador do Sistema" />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,30 @@
+spring:
+  profiles:
+    active:
+      - ${SPRING_PROFILES_ACTIVE:dev}
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+  threads:
+    virtual:
+      enabled: true
+server:
+  error:
+    include-message: always
+  tomcat:
+    uri-encoding: UTF-8
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+    compressable-mime-types: application/json,application/xml,text/html,text/xml,text/plain
+  http2:
+    enabled: true
+  ssl:
+    enabled: false
+  session:
+    cookie:
+    http-only: true
+    secure: true
+    max-age: 1800
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false

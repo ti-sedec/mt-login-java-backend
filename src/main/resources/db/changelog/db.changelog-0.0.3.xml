@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="wagner" id="CRIAR MT_USER_HAS_MY_ROLE">
+        <createTable tableName="mt_user_has_my_role" catalogName="public">
+            <column name="mt_user_id" type="bigint">
+                <constraints primaryKey="true"
+                             nullable="false"
+                             foreignKeyName="fk_muhmr_mt_user"
+                             references="mt_user(id)"/>
+            </column>
+            <column name="my_role_id" type="bigint">
+                <constraints primaryKey="true"
+                             nullable="false"
+                             foreignKeyName="fk_muhmr_mt_my_role"
+                             references="my_role(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

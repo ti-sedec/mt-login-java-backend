@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <include file="db/changelog/db.changelog-0.0.1.xml"/>  <!-- create table my_role -->
+    <include file="db/changelog/db.changelog-0.0.2.xml"/>  <!-- create table mt_user -->
+    <include file="db/changelog/db.changelog-0.0.3.xml"/>  <!-- create table mt_user_has_my_role -->
+    <include file="db/changelog/db.changelog-0.0.4.xml"/>  <!-- update table my_role -->
+</databaseChangeLog>
