@@ -6,7 +6,9 @@ import br.gov.mt.mtloginjavabackend.security.user.MtUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -54,7 +56,6 @@ public class CustomJwtAuthenticationTokenConverter implements Converter<Jwt, Cus
                                 .toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"))
                 )
                 .roles(List.of(roleService.findByNomeOrElseThrowNotFound("ROLE_USER")))
-                .ativo(true)
                 .build();
 
         return user;
@@ -72,9 +73,13 @@ public class CustomJwtAuthenticationTokenConverter implements Converter<Jwt, Cus
 
         if (userOpt.isEmpty()) {
             user = retornaUserDoJwt(source);
+            user.setAtivo(true);
             userService.save(user);
         } else {
             user = userOpt.get();
+            if(!user.getAtivo()) {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "O usuário está desativado");
+            }
             MtUser jwtUser = retornaUserDoJwt(source);
             jwtUser.setId(user.getId());
             if (!user.equals(jwtUser)) {
